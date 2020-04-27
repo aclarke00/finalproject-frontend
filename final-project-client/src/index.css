@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css?family=Domine&display=swap');
+
+
+body {
+  margin: 0;
+  font-family: 'Domine', serif;
+  font-size: 16px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  
+}
+
+code {
+  font-family: 'Domine', serif;
+}
+
+h1 {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 400;
+  /* margin: 0 0 20px; */
+}
+
+h2, h3 {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.home-img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  border-radius: 8px;
+}
+
+.form-container {
+  background-color: whitesmoke;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  width: 400px;
+
+
+  padding: 30px 40px;
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  display: block;
+  box-sizing: border-box;
+  
+  border-radius: 5px;
+  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); */
+  width: 400px;
+
+  border: 2px solid #f0f0f0;
+  border-radius: 4px;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.label-container {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 2.4375rem;
+  margin: 0 0 1rem;
+  padding: .5rem;
+  border: 1px solid #bfb8af;
+  border-radius: 2px;
+  background-color: #fff;
+  box-shadow: 0;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #2d2a24;
+  transition: border-color .25s ease-in-out;
+}
+
+.submit-button {
+  /* font-family: 'Domine', serif;
+  font-weight: 400px;
+  cursor: pointer;
+  
+  /* border: 2px solid  #00ab84;
+  border-radius: 2px; 
+  
+  display: block;
+  font-size: 14px;
+  padding: 5px;
+  margin: 24px 0px 16px;
+  width: 10%; */ 
+
+  color: #fff;
+  background-color:  #00ab84;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0 1rem;
+  padding: 1rem 1.5rem;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  transition: background-color .25s ease-out,color .25s ease-out;
+  font-family: inherit;
+  font-size: .9rem;
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+}
+
+.logout-button {
+  color: #fff;
+  background-color:  #00ab84;
+  transition: background-color .25s ease-out,color .25s ease-out;
+  display: center;
+  vertical-align: center;
+  margin: 0 0 1rem;
+  margin-top: 10px;
+  margin-left: 10px;
+  padding: 1rem 1.5rem;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  transition: background-color .25s ease-out,color .25s ease-out;
+  font-family: inherit;
+  font-size: .9rem;
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+}
+
+.input-label {
+  text-transform: uppercase;
+  color: #7d7a75;
+  letter-spacing: 1px;
+  margin-bottom: .5rem;
+  font-size: .75rem;
+}
+
+
+ol {
+  width: 50%;
+  margin: auto;
+
+}
+
+ol li {
+  width: 20%;
+  margin: auto;
+
+}
+
+ul.nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #00ab84;
+}
+
+ul.nav li {
+  float: left;
+}
+
+ul.nav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+ul.nav li a:hover {
+  background-color: #111;
+}
+
+.treeTile {
+  display: inline;
+  background-repeat: no-repeat;
+  background-position: center 90%;
+  float: left;
+  margin: 2%;
+  padding: 1%;
+  /* border: 1px solid #767676; */
+  outline: #4BD8C8 double;
+  transition: 0.75s;
+  opacity: 1;
+}
