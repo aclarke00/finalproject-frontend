@@ -4,7 +4,8 @@ import {NavLink} from 'react-router-dom'
 const NavBar = () => {
   return(
     <ul className="nav">
-      <li>
+    
+    <li>
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
@@ -17,7 +18,7 @@ const NavBar = () => {
         <NavLink to="/register">Create an Account</NavLink>
       </li>
       <li>
-        <NavLink to="/profile">Profile</NavLink>
+        <NavLink  to="/profile">Profile</NavLink>
       </li>
     </ul>
   )

@@ -2,6 +2,7 @@
 
 
 body {
+  /* background-image: url("plant_background.jpg"); */
   margin: 0;
   font-family: 'Domine', serif;
   font-size: 16px;
@@ -145,6 +146,31 @@ h2, h3 {
   font-size: .75rem;
 }
 
+.bio-label {
+  text-transform: uppercase;
+  color: #7d7a75;
+}
+
+.section-title {
+  color: #2d2a24;
+
+  font-family: Domaine-Medium,helvetica,roboto,arial,sans-serif;
+  font-size: 20px;
+  line-height: 1.8;
+  text-transform: uppercase;
+  margin-bottom: .5rem;
+  letter-spacing: 1px;
+  color: #7d7a75;
+
+
+  line-height: 1.1;
+  font-weight: 300px;
+}
+
+p {
+  color: #2d2a24;
+}
+
 
 ol {
   width: 50%;
@@ -195,4 +221,11 @@ ul.nav li a:hover {
   outline: #4BD8C8 double;
   transition: 0.75s;
   opacity: 1;
+}
+
+.tree-image {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  left: 300px;
 }

@@ -8,7 +8,7 @@ class ProfileContainer extends Component {
       <div>
         <h2>{username}&apos;s Profile</h2>
         <h3>Prospect Park Trees {username} has seen so far :
-        <Tree />
+        {/* <Tree /> */}
         </h3>
       </div>
     );

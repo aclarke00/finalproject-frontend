@@ -16,6 +16,7 @@ class App extends React.Component {
       username: "",
       trees: []
     },
+    treeArray: [],
     token: "",
   }
 
@@ -34,9 +35,7 @@ class App extends React.Component {
     .then(r => r.json())
     .then(trees => {
       this.setState({
-        user: {
-        trees: trees
-        }
+        treeArray: trees
       })
     })
   }
@@ -114,13 +113,14 @@ class App extends React.Component {
 
   renderContainer = (routerProps) => {
     if (routerProps.location.pathname === "/explore"){
-      return <TreeContainer trees={this.state.user.trees} /> 
+      return <TreeContainer trees={this.state.treeArray} /> 
     } else {
       return <Redirect to="/" />
     }
   }
   
   render(){
+    console.log(this.state.user)
     return (
       <div className="App">
         <NavBar />
