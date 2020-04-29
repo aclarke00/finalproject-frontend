@@ -79,6 +79,7 @@ class App extends React.Component {
     })
     localStorage.clear()
   }
+
   handleResponse = (resp) => {
     if (!resp.message) {
       localStorage.token = resp.token
@@ -93,6 +94,7 @@ class App extends React.Component {
       alert(resp.message)
     }
   }
+
   renderForm = (routerProps) => {
     if(routerProps.location.pathname === "/login"){
       return <Form formName="Log in to your account" handleSubmit={this.handleLoginSubmit}/>
@@ -111,13 +113,39 @@ class App extends React.Component {
     }
   }
 
+  addTreeToProfile = (input) => {
+      console.log(input)
+      console.log(this.state.user)
+
+    
+    let sightingsObj = {user_id: this.state.user.id, tree_id: input}
+
+    fetch("http://localhost:4000/sightings", {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(sightingsObj)
+    })
+      .then(r => r.json())
+      .then(data => {
+        this.setState({
+          user: {trees: [...this.state.user.trees, data.tree] }
+        })
+        alert(`${data.tree.name} has been added to your list`)
+      })
+  }
+
+
   renderContainer = (routerProps) => {
     if (routerProps.location.pathname === "/explore"){
-      return <TreeContainer trees={this.state.treeArray} /> 
+      return <TreeContainer trees={this.state.treeArray} addTreeToProfile={this.addTreeToProfile}/> 
     } else {
       return <Redirect to="/" />
     }
   }
+
+
   
   render(){
     console.log(this.state.user)

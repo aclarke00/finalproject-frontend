@@ -3,12 +3,18 @@ import React, {Component} from 'react';
 
 class Tree extends Component {
 
+  handleChange = (event) => {
+    this.props.addTreeToProfile(this.props.tree.id) 
+  }
+
   
   render() {
     
-    console.log(this.props.tree)
+    console.log(this.props)
     
     let {name, size, bark_description, leaf_characteristics, image_url} = this.props.tree
+
+
 
     return(
 
@@ -24,9 +30,10 @@ class Tree extends Component {
           <p>{size}</p>
           <p>{bark_description}</p>
           <p>{leaf_characteristics}</p>
-          <img className="tree-image" src={image_url} />
+          <img className="tree-image" src={image_url} /><br></br>
+          {this.props.addTreeToProfile ? <button className="add-button"  onClick={this.handleChange}>Add to Profile as Seen</button> : null}
            
-         </div>
+        </div>
     </div>
     
     )}

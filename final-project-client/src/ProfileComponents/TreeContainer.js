@@ -8,7 +8,7 @@ const TreeContainer = (props) => {
     
     let arrayOfComponents = props.trees.map((tree) => {
         // console.log(tree)
-      return <Tree key={tree.id} tree={tree} />
+      return <Tree key={tree.id} tree={tree} addTreeToProfile={props.addTreeToProfile}/>
     })
   
   

@@ -24,7 +24,7 @@ class Form extends Component {
     let {username, password} = this.state
 
     return (
-      <div className="form-container">
+      <div className="flex-container">
       <form onSubmit={this.handleSubmit}>
         <h1>{formName}</h1>
         <label className="input-label" htmlFor="username">Username</label>
