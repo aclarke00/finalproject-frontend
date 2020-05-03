@@ -44,9 +44,9 @@ h2, h3 {
   border-radius: 8px;
 }
 
-.flex-container {
+.flex-container, .search {
   background-color: whitesmoke;
-  display: felx;
+  display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -74,7 +74,7 @@ h2, h3 {
   font-size: 14px;
 }
 
-.label-container {
+.label-container, .searchTerm {
   display: flex;
   box-sizing: border-box;
   width: 100%;
@@ -127,15 +127,15 @@ h2, h3 {
   color: #fff;
   background-color:  #00ab84;
   transition: background-color .25s ease-out,color .25s ease-out;
-  display: center;
-  vertical-align: center;
+  display: inline-block;
+  vertical-align: middle;
   margin: 0 0 1rem;
   margin-top: 10px;
   margin-left: 10px;
   padding: 1rem 1.5rem;
   border: 1px solid transparent;
   border-radius: 2px;
-  transition: background-color .25s ease-out,color .25s ease-out;
+  
   font-family: inherit;
   font-size: .9rem;
   line-height: 1;
@@ -216,7 +216,7 @@ ul.nav li a:hover {
 }
 
 .treeTile {
-  display: flex;
+  display: block;
   background-repeat: no-repeat;
   background-position: center 90%;
   /* float: left; */
@@ -234,3 +234,4 @@ ul.nav li a:hover {
   position: relative;
   left: 300px;
 }
+

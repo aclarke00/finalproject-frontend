@@ -5,6 +5,7 @@ import NavBar from './components/NavBar'
 import Home from './components/Home'
 import ProfileContainer from './ProfileComponents/ProfileContainer.js'
 import TreeContainer from './ProfileComponents/TreeContainer.js'
+import SearchBar from './components/SearchBar'
 import {withRouter, Redirect} from 'react-router-dom'
 
  
@@ -17,6 +18,7 @@ class App extends React.Component {
       trees: []
     },
     treeArray: [],
+    searchTerm: '',
     token: "",
   }
 
@@ -40,7 +42,20 @@ class App extends React.Component {
     })
   }
 
+  changeSearchTerm = (termFromChild) => {
+    this.setState({
+      searchTerm: termFromChild
+    })
+  }
 
+  returnsAnArray = () => {
+    let {treeArray, searchTerm} = this.state
+    
+    let filteredArray = treeArray.filter((tree) => {
+      return tree.name.includes(searchTerm) || tree.bark_description.includes(searchTerm)
+    })
+    return filteredArray
+  }
 
   handleLoginSubmit = (userInfo) => {
     console.log("Login form has been submitted")
@@ -137,14 +152,31 @@ class App extends React.Component {
   }
 
 
+    deleteOneTree = (id) => {
+      let {trees} = this.state.user
+      
+      let newArray = trees.filter(tree => tree.id !== id)
+      this.setState({
+        user: {
+          id: this.state.user.id,
+          username: this.state.user.username,
+          trees: newArray
+          }
+      })
+      fetch(`http://localhost:4000/trees/${id}`, {
+        method: 'DELETE'
+      })
+    }
+
+
   renderContainer = (routerProps) => {
     if (routerProps.location.pathname === "/explore"){
-      return <TreeContainer trees={this.state.treeArray} addTreeToProfile={this.addTreeToProfile}/> 
+      return <TreeContainer trees={this.returnsAnArray()} addTreeToProfile={this.addTreeToProfile} deleteOneTree={this.deleteOneTree}/> 
     } else {
       return <Redirect to="/" />
     }
   }
-
+ 
 
   
   render(){
@@ -153,6 +185,7 @@ class App extends React.Component {
       <div className="App">
         <NavBar />
         {this.state.token && <button className="logout-button" onClick={this.handleLogout}>Log out</button>}
+        <SearchBar searchTerm={this.state.searchTerm} changeSearchTerm={this.changeSearchTerm} />
         <Switch>
           <Route path="/login" render={ this.renderForm } />
           <Route path="/explore" render={ this.renderContainer } />

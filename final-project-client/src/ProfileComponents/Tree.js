@@ -3,14 +3,21 @@ import React, {Component} from 'react';
 
 class Tree extends Component {
 
+
+
   handleChange = (event) => {
     this.props.addTreeToProfile(this.props.tree.id) 
+  }
+
+  handleDelete = (event) => {
+    console.log(event, 'hello from delete')
+    this.props.deleteOneTree(this.props.tree.id)
   }
 
   
   render() {
     
-    console.log(this.props)
+    console.log(this.props, 'TREE PROPS!!!')
     
     let {name, size, bark_description, leaf_characteristics, image_url} = this.props.tree
 
@@ -31,8 +38,8 @@ class Tree extends Component {
           <p>{bark_description}</p>
           <p>{leaf_characteristics}</p>
           <img className="tree-image" src={image_url} /><br></br>
-          {this.props.addTreeToProfile ? <button className="add-button"  onClick={this.handleChange}>Add to Profile as Seen</button> : null}
-           
+          {this.props.addTreeToProfile ? <button className="add-button"  onClick={this.handleChange}>Add to Profile as Seen</button> : null} <br></br>
+          <button className="add-button" onClick={this.handleDelete}>Delete Tree from Profile</button>
         </div>
     </div>
     
