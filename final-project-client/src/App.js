@@ -6,6 +6,7 @@ import Home from './components/Home'
 import ProfileContainer from './ProfileComponents/ProfileContainer.js'
 import TreeContainer from './ProfileComponents/TreeContainer.js'
 import SearchBar from './components/SearchBar'
+import NewTreeForm from './ProfileComponents/NewTreeForm'
 import {withRouter, Redirect} from 'react-router-dom'
 
  
@@ -117,11 +118,13 @@ class App extends React.Component {
       return <Form formName="Don't have an account? Create one" handleSubmit={this.handleRegisterSubmit}/>
     }
   }
+
   renderProfile = (routerProps) => {
     if (this.state.token) {
       return <ProfileContainer
         user={this.state.user}
         token={this.state.token}
+        deleteOneTree={this.deleteOneTree}
       />
     } else {
       return <Redirect to="/login"/>
@@ -145,7 +148,10 @@ class App extends React.Component {
       .then(r => r.json())
       .then(data => {
         this.setState({
-          user: {trees: [...this.state.user.trees, data.tree] }
+          user: {
+            id: this.state.id,
+            username: this.state.user.username,
+            trees: [...this.state.user.trees, data.tree] }
         })
         alert(`${data.tree.name} has been added to your list`)
       })
@@ -153,39 +159,54 @@ class App extends React.Component {
 
 
     deleteOneTree = (id) => {
-      let {trees} = this.state.user
-      
-      let newArray = trees.filter(tree => tree.id !== id)
-      this.setState({
-        user: {
-          id: this.state.user.id,
-          username: this.state.user.username,
-          trees: newArray
-          }
-      })
-      fetch(`http://localhost:4000/trees/${id}`, {
+      fetch(`http://localhost:4000/sightings/${id}`, {
         method: 'DELETE'
       })
-    }
+        .then(r => r.json)
+        .then(() => {
+          let {trees} = this.state.user
+
+          let newArray = trees.sightings.filter(tree => this.state.user.id === tree.user_id)
+          
+          console.log(newArray)
+        
+          // this.setState({
+          //   user: {
+          //     id: this.state.user.id,
+          //     username: this.state.user.username,
+          //     trees: newArray
+          //     }
+          // })
+
+        })
+      }
 
 
   renderContainer = (routerProps) => {
     if (routerProps.location.pathname === "/explore"){
-      return <TreeContainer trees={this.returnsAnArray()} addTreeToProfile={this.addTreeToProfile} deleteOneTree={this.deleteOneTree}/> 
+      return <> <SearchBar searchTerm={this.state.searchTerm} changeSearchTerm={this.changeSearchTerm} />
+      <TreeContainer trees={this.returnsAnArray()} addTreeToProfile={this.addTreeToProfile} deleteOneTree={this.deleteOneTree} />  </>
     } else {
       return <Redirect to="/" />
     }
   }
  
+  // renderSearchBar = (routerProps) => {
+  //   if (routerProps.location.pathname === '/explore'){
+  //     return <SearchBar searchTerm={this.state.searchTerm} changeSearchTerm={this.changeSearchTerm} />
+  //   } else {
+  //     return <Redirect to='/' />
+  //   }
+  // }
 
   
   render(){
     console.log(this.state.user)
     return (
       <div className="App">
-        <NavBar />
-        {this.state.token && <button className="logout-button" onClick={this.handleLogout}>Log out</button>}
-        <SearchBar searchTerm={this.state.searchTerm} changeSearchTerm={this.changeSearchTerm} />
+        <NavBar handleLogout={this.handleLogout}/>
+        {/* {this.state.token && <button className="logout-button" onClick={this.handleLogout}>Log out</button>} */}
+        {/* <SearchBar searchTerm={this.state.searchTerm} changeSearchTerm={this.changeSearchTerm} /> */}
         <Switch>
           <Route path="/login" render={ this.renderForm } />
           <Route path="/explore" render={ this.renderContainer } />
