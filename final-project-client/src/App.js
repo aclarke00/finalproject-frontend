@@ -12,11 +12,13 @@ import {withRouter, Redirect} from 'react-router-dom'
  
 
 class App extends React.Component {
+
   state = {
     user: {
       id: 0,
       username: "",
-      trees: []
+      trees: [],
+      sightings: []
     },
     treeArray: [],
     searchTerm: '',
@@ -97,6 +99,7 @@ class App extends React.Component {
   }
 
   handleResponse = (resp) => {
+    
     if (!resp.message) {
       localStorage.token = resp.token
       this.setState({
@@ -133,11 +136,18 @@ class App extends React.Component {
 
   addTreeToProfile = (input) => {
       console.log(input)
-      console.log(this.state.user)
+      console.log(this.state.user.trees)
+    const tree = this.state.user.trees.find((tree) => {
+      return input == tree.id
+    }) 
+      if (tree) {
+        alert("This tree has been seen!") 
+        return 
+      }
 
-    
+     console.log(tree) 
     let sightingsObj = {user_id: this.state.user.id, tree_id: input}
-
+      console.log(sightingsObj)
     fetch("http://localhost:4000/sightings", {
       method: 'POST',
       headers: {
@@ -147,11 +157,13 @@ class App extends React.Component {
     })
       .then(r => r.json())
       .then(data => {
+        console.log(data)
         this.setState({
           user: {
-            id: this.state.id,
+            id: this.state.user.id,
             username: this.state.user.username,
-            trees: [...this.state.user.trees, data.tree] }
+            trees: [...this.state.user.trees, data.tree],
+            sightings: [...this.state.user.sightings, data] }
         })
         alert(`${data.tree.name} has been added to your list`)
       })
@@ -159,24 +171,37 @@ class App extends React.Component {
 
 
     deleteOneTree = (id) => {
-      fetch(`http://localhost:4000/sightings/${id}`, {
+      console.log(id)
+      const sighting = this.state.user.sightings.find((sighting) => {
+        return sighting.tree_id == id
+      })
+      console.log(sighting)
+
+
+      fetch(`http://localhost:4000/sightings/${sighting.id}`, {
         method: 'DELETE'
       })
-        .then(r => r.json)
-        .then(() => {
-          let {trees} = this.state.user
-
-          let newArray = trees.sightings.filter(tree => this.state.user.id === tree.user_id)
+        .then(r => r.json())
+        .then((r) => {
+          console.log(r)
           
+          let {trees, sightings} = this.state.user
+
+          console.log(trees, '188')
+          let newArray = trees.filter(tree => tree.id !== r.tree.id)
+          
+          let newSightingArr = sightings.filter(sighting => sighting.id !== r.id)
+
           console.log(newArray)
         
-          // this.setState({
-          //   user: {
-          //     id: this.state.user.id,
-          //     username: this.state.user.username,
-          //     trees: newArray
-          //     }
-          // })
+          this.setState({
+            user: {
+              id: this.state.user.id,
+              username: this.state.user.username,
+              trees: newArray,
+              sightings: newSightingArr
+              }
+          })
 
         })
       }
